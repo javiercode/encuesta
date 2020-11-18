@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'cancion', 'titlePage' => __('Administración de Artista')])
+@extends('layouts.app', ['activePage' => 'cancion', 'titlePage' => __('Administración de Encuesta')])
 
 @section('content')
 
@@ -14,7 +14,7 @@
               <div class="row">
                 <div class="col-lg-12 margin-tb">
                   <div class="pull-right">
-                    <a class="nav-link text-white" href="{{ route('artista.create') }}" title="Adicionar">
+                    <a class="nav-link text-white" href="{{ route('encuesta.create') }}" title="Adicionar">
                       <i class="material-icons">add_box</i> </a>
                   </div>
                 </div>
@@ -25,19 +25,24 @@
                 <table class="table table-hover">
                   <thead class="text-primary">
                   <th>Nro</th>
-                  <th>Nombre</th>
-                  <th>Fecha Creación</th>
+                  <th>Descripción</th>
+                  <th>Periodo</th>
+                  <th>Autorizaciones</th>
+                  <th>Respuestas por Persona</th>
+                  <th>Estado</th>
                   <th width="280px">Acciones</th>
                   </thead>
                   <tbody>
-                  @foreach ($artistaList as $artista)
+                  @foreach ($encuestaList as $encuesta)
                     <tr>
                       <td>{{ ++$i }}</td>
-                      <td>{{ $artista->nombre }}</td>
-                      <td>{{ date_format($artista->created_at, 'jS M Y') }}</td>
+                      <td>{{ $encuesta->nombre }}</td>
+                      <td>{{ $encuesta->descripcion }}</td>
+                      <td>{{ date_format($encuesta->fechaInicio, 'jS M Y') }} -
+                        {{ date_format($encuesta->fechaFin, 'jS M Y') }} </td>
                       <td>
-                        <form action="{{ route('artista.destroy',  $artista->id) }}" method="POST">
-                          <a href="{{ route('artista.edit', $artista) }}">
+                        <form action="{{ route('artista.destroy',  $encuesta->id) }}" method="POST">
+                          <a href="{{ route('artista.edit', $encuesta) }}">
                             <i class="material-icons">edit</i> </a>
                           @csrf
                           @method('DELETE')
@@ -66,5 +71,5 @@
 
 
 
-  {!! $artistaList->links() !!}
+  {!! $encuestaList->links() !!}
 @endsection
