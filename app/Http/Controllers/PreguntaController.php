@@ -53,8 +53,8 @@ class PreguntaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required',
-            'idArtista' => 'required',
+            'titulo' => 'required',
+            'id_encuesta' => 'required',
             'gestionLanzamiento' => 'required'
         ]);
 

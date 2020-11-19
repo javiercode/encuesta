@@ -13,16 +13,16 @@ class EncuestaTable extends Migration
      */
     public function up()
     {
-        Schema::create('encuenta', function (Blueprint $table) {
+        Schema::create('encuesta', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('descripcion');
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
-            $table->boolean('correo_autorizado');
-            $table->boolean('session_autorizado');
-            $table->boolean('respuesta_persona');
-            $table->boolean('estado');
+            $table->boolean('correo_autorizado')->default(false);
+            $table->boolean('session_autorizado')->default(false);
+            $table->boolean('respuesta_persona')->default(false);
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }

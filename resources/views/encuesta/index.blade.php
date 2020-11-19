@@ -25,10 +25,9 @@
                 <table class="table table-hover">
                   <thead class="text-primary">
                   <th>Nro</th>
-                  <th>Descripción</th>
+                  <th>Nombre</th>
                   <th>Periodo</th>
                   <th>Autorizaciones</th>
-                  <th>Respuestas por Persona</th>
                   <th>Estado</th>
                   <th width="280px">Acciones</th>
                   </thead>
@@ -36,13 +35,20 @@
                   @foreach ($encuestaList as $encuesta)
                     <tr>
                       <td>{{ ++$i }}</td>
-                      <td>{{ $encuesta->nombre }}</td>
-                      <td>{{ $encuesta->descripcion }}</td>
-                      <td>{{ date_format($encuesta->fechaInicio, 'jS M Y') }} -
-                        {{ date_format($encuesta->fechaFin, 'jS M Y') }} </td>
+                      <td>{{ $encuesta->nombre }} <br>
+                        <small>{{ $encuesta->descripcion }}</small>
+                      </td>
+                      <td>{{ \Carbon\Carbon::parse($encuesta->fecha_inicio)->format('jS, M Y') }} -
+                        {{ \Carbon\Carbon::parse($encuesta->fecha_fin)->format('jS, M Y') }}</td>
                       <td>
-                        <form action="{{ route('artista.destroy',  $encuesta->id) }}" method="POST">
-                          <a href="{{ route('artista.edit', $encuesta) }}">
+                        Correo: {{ $encuesta->correo_autorizado? 'SI':'NO' }} <br>
+                        Session: {{ $encuesta->session_autorizado? 'SI':'NO' }} <br>
+                        Por persona: {{ $encuesta->respuesta_persona? 'SI':'NO' }} <br>
+                      </td>
+                      <td> {{ $encuesta->estado? 'Abierto':'Cerrado' }}</td>
+                      <td>
+                        <form action="{{ route('encuesta.destroy',  $encuesta->id) }}" method="POST">
+                          <a href="{{ route('encuesta.edit', $encuesta) }}">
                             <i class="material-icons">edit</i> </a>
                           @csrf
                           @method('DELETE')

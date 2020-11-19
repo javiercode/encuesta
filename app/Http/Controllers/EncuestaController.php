@@ -39,13 +39,11 @@ class EncuestaController extends Controller
     {
         $request->validate([
             'nombre' => 'required',
-            'fechaInicio' => 'required',
-            'fechaFin' => 'required',
-            'correoAutorizado' => 'required',
-            'sessionAutorizado' => 'required',
-            'estado' => 'required',
+            'fecha_inicio' => 'required',
+            'fecha_fin' => 'required',
         ]);
 
+//        print_r($request->all());exit;
         Encuesta::create($request->all());
 
         return redirect()->route('encuesta.index')

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'profile', 'titlePage' => __('Album')])
+@extends('layouts.app', ['activePage' => 'profile', 'titlePage' => __('Artista')])
 
 @section('content')
   <div class="content">
@@ -7,7 +7,7 @@
         <div class="col-md-12">
           <div class="card card-plain">
             <div class="card-header card-header-primary">
-              <h4 class="card-title mt-0"> Editar Album</h4>
+              <h4 class="card-title mt-0"> Editar Artista</h4>
               <div class="row">
                 <div class="col-lg-12 margin-tb">
                   <div class="pull-right">
@@ -48,32 +48,15 @@
                   </div>
                 @endif
 
-                <form action="{{ route('album.update', $album->id) }}" method="POST">
+                <form action="{{ route('artista.update', $artista->id) }}" method="POST">
                   @csrf
                   @method('PUT')
 
                   <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                       <div class="form-group">
-                        <strong>Name:</strong>
-                        <input type="text" name="nombre" value="{{ $album->nombre }}" class="form-control" placeholder="Name">
-                      </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                      <div class="form-group">
-                        <strong>Año Lanzamiento:</strong>
-                        <input type="text" name="gestionLanzamiento" value="{{ $album->gestionLanzamiento }}" class="form-control" placeholder="Año">
-                      </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                      <div class="form-group">
-                        <strong>Artista:</strong>
-                        <select name="idArtista" id="" class="form-control">
-                          @foreach ($artistaList as $artista)
-                            <option value="{{$artista['id']}}" {{$artista['id']==$album->idArtista ? 'SELECTED': ''}}>{{$artista['nombre']}}</option>
-                          @endforeach
-                        </select>
+                        <strong>Nombre:</strong>
+                        <input type="text" name="nombre" value="{{ $artista->nombre }}" class="form-control" placeholder="Name">
                       </div>
                     </div>
 

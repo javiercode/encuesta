@@ -17,7 +17,7 @@ class PreguntaTable extends Migration
             $table->id();
             $table->string('titulo');
             $table->integer('id_encuesta');
-            $table->string('tipo_pregunta');
+            $table->string('tipo');
             $table->integer('cantidad_archivo');
             $table->integer('orden');
             $table->timestamps();

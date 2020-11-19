@@ -1,6 +1,7 @@
-@extends('layouts.app', ['activePage' => 'cancion', 'titlePage' => __('Administración de Album')])
+@extends('layouts.app', ['activePage' => 'cancion', 'titlePage' => __('Administración de Pregunta')])
 
 @section('content')
+
   <div class="content">
     <div class="container-fluid">
       <div class="row">
@@ -9,10 +10,11 @@
             <div class="card-header card-header-primary">
               <h4 class="card-title mt-0"> Listado</h4>
 
+
               <div class="row">
                 <div class="col-lg-12 margin-tb">
                   <div class="pull-right">
-                    <a class="nav-link text-white" href="{{ route('album.create') }}" title="Adicionar">
+                    <a class="nav-link text-white" href="{{ route('pregunta.create') }}" title="Adicionar">
                       <i class="material-icons">add_box</i> </a>
                   </div>
                 </div>
@@ -23,30 +25,32 @@
                 <table class="table table-hover">
                   <thead class="text-primary">
                   <th>Nro</th>
-                  <th>Nombre</th>
-                  <th>Año de Lanzamiento</th>
-                  <th>Artista</th>
-                  <th>Fecha Creación</th>
+                  <th>Titulo</th>
+                  <th>Encuesta</th>
+                  <th>Tipo</th>
+                  <th>Cantidad</th>
                   <th width="280px">Acciones</th>
                   </thead>
                   <tbody>
-                  @foreach ($albumList as $album)
+                  @foreach ($preguntaList as $pregunta)
                     <tr>
                       <td>{{ ++$i }}</td>
-                      <td>{{ $album->nombre }}</td>
-                      <td>{{ $album->gestionLanzamiento }}</td>
-                      <td>{{ $aArtista[$album->idArtista] }}</td>
-                      <td>{{ date_format($album->created_at, 'jS M Y') }}</td>
+                      <td>{{ $pregunta->titulo }} <br>
+                        <strong>Orden: </strong> <small>{{ $pregunta->orden}}</small>
+                      </td>
+                      <td>{{ $encuestaList[$pregunta->id_encuesta] }}</td>
+                      <td>{{ $pregunta->tipo}}</td>
+                      <td> {{ $pregunta->cantidad_archivo}}</td>
                       <td>
-                        <form action="{{ route('album.destroy',  $album->id) }}" method="POST">
-                          <a href="{{ route('album.edit', $album) }}">
+                        <form action="{{ route('pregunta.destroy',  $pregunta->id) }}" method="POST">
+                          <a href="{{ route('pregunta.edit', $pregunta) }}">
                             <i class="material-icons">edit</i> </a>
                           @csrf
                           @method('DELETE')
-                          <button type="submit" rel="tooltip" title="Eliminar"
-                                  class="btn btn-danger btn-link btn-sm">
+                        <button type="submit" rel="tooltip" title="Eliminar"
+                                class="btn btn-danger btn-link btn-sm">
                             <i class="material-icons">close</i>
-                          </button>
+                        </button>
                         </form>
                       </td>
                     </tr>
@@ -60,24 +64,6 @@
       </div>
     </div>
   </div>
-
-  <div class="row">
-    <br><br><br><br><br><br>
-    <div class="col-lg-12 margin-tb">
-      <div class="pull-left">
-        <!--<h2>albumes</h2>-->
-      </div>
-      <div class="pull-right">
-        <br>
-        <br>
-        <br>
-        <br>
-        <a class="btn btn-success" href="{{ route('album.create') }}" title="Create a project"> <i class="fas fa-plus-circle"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-
   @if ($message = Session::get('success'))
     <div class="alert alert-success">
       <p>{{ $message }}</p>
@@ -86,5 +72,5 @@
 
 
 
-  {!! $albumList->links() !!}
+  {!! $preguntaList->links() !!}
 @endsection
