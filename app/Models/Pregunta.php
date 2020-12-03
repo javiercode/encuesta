@@ -10,7 +10,7 @@ class Pregunta extends Model
     use HasFactory;
     protected $table = 'pregunta';
 
-    protected $fillable = ['titulo', 'id_encuesta', 'tipo_pregunta', 'cantidad_archivo', 'orden'];
+    protected $fillable = ['titulo', 'id_encuesta', 'tipo', 'cantidad_archivo', 'orden'];
 //    protected $fillable = ['titulo', 'idEncuesta', 'tipoPregunta', 'cantidadArchivo', 'orden'];
 
     public $timestamps = true;

@@ -54,6 +54,11 @@ Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->
 //	})->name('upgrade');
 //});
 
+Route::prefix('admin')->group(function (){
+//    Route::resource('reporte', 'ReporteController');
+    Route::get('pregunta.tipo', 'App\Http\Controllers\PreguntaController@getTipo');
+});
+
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);

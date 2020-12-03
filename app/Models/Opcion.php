@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Opcion extends Model
 {
     use HasFactory;
+
+    protected $table = 'opcion';
+
+    protected $fillable = ['texto', 'valor', 'orden'];
+
+    public $timestamps = true;
 }

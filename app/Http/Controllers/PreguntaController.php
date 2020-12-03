@@ -16,7 +16,16 @@ class PreguntaController extends Controller
     public function index()
     {
         $preguntaPage = Pregunta::latest()->paginate(10);
-        return view('pregunta.index', ['preguntaList'=>$preguntaPage])
+        $encuestaList = Encuesta::orderBy('nombre', 'asc')->get()
+            ->map(function ($record) {
+                return array($record->id => $record->nombre);
+            })->all();
+        $encuestaList= array_reduce($encuestaList,function ($carray, $oValue){
+            $carray[key($oValue)]=$oValue[key($oValue)];
+            return $carray;
+        });
+
+        return view('pregunta.index', ['preguntaList'=>$preguntaPage, 'encuestaList'=>$encuestaList])
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -32,6 +41,18 @@ class PreguntaController extends Controller
         return $encuestaList;
     }
 
+
+    public function getTipo (){
+        $encuestaList = [
+            'radio'=>['name'=>'Varias Opciones(una respuesta)', 'key'=>'radio'],
+            'checkbox'=>['name'=>'Varias Opciones(varias respuesta)','key'=>'checkbox'],
+            'text'=>['name'=>'Respuesta corta','key'=>'text'],
+            'textarea'=>['name'=>'Respueta de parrafo','key'=>'textarea'],
+            'file'=>['name'=>'Archivos','key'=>'file'],
+        ];
+        return $encuestaList;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -39,9 +60,11 @@ class PreguntaController extends Controller
      */
     public function create()
     {
-        $preguntaList = Pregunta::orderBy('nombre', 'desc')
+        $encuentaList = Encuesta::orderBy('nombre', 'desc')
             ->get()->toArray();
-        return view('pregunta.create',compact('preguntaList'));
+//        print_r($encuentaList);exit;
+//        return view('pregunta.create',compact('encuentaList'));
+        return view('pregunta.create',['encuestaList'=>$encuentaList,'tipoEncuesta'=>$this->getTipo()]);
     }
 
     /**
@@ -55,7 +78,7 @@ class PreguntaController extends Controller
         $request->validate([
             'titulo' => 'required',
             'id_encuesta' => 'required',
-            'gestionLanzamiento' => 'required'
+            'tipo' => 'required'
         ]);
 
         Pregunta::create($request->all());

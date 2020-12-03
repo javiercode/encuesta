@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'profile', 'titlePage' => __('Artista')])
+@extends('layouts.app', ['activePage' => 'pregunta', 'titlePage' => __('Crear Pregunta')])
 
 @section('content')
 
@@ -9,14 +9,6 @@
           <div class="card card-plain">
             <div class="card-header card-header-primary">
               <h4 class="card-title mt-0"> Crear Pregunta</h4>
-              <div class="row">
-                <div class="col-lg-12 margin-tb">
-                  <div class="pull-right">
-                    <a class="nav-link text-white" href="{{ route('pregunta.create') }}" title="Adicionar">
-                      <i class="material-icons">add_box</i> </a>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="card-body">
               @if ($errors->any())
@@ -35,15 +27,23 @@
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                       <strong>Titulo:</strong>
-                      <input type="text" name="nombre" class="form-control" placeholder="Nombre">
+                      <input type="text" name="titulo" class="form-control" placeholder="Nombre">
                     </div>
                     <div class="form-group">
                       <strong>Encuesta:</strong>
-                      <textarea name="descripcion" id="" class="form-control" cols="30" rows="3"></textarea>
+                        <select name="id_encuesta" class="form-control">
+                            @foreach ($encuestaList as $encuesta)
+                                <option value="{{$encuesta['id']}}">{{$encuesta['nombre']}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                       <strong>Tipo:</strong>
-                      <input type="checkbox" name="correo_autorizado"  data-plugin="switchery" placeholder="Correo" value="0">
+                        <select name="tipo" class="form-control">
+                            @foreach ($tipoEncuesta as $tipo)
+                                <option value="{{ ($tipo['key'])}}">{{ ($tipo['name'])}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                   </div>
@@ -69,5 +69,7 @@
       </div>
     </div>
   </div>
-
 @endsection
+@slot('javascript')
+  @include('pregunta.app')
+@endslot

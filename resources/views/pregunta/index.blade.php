@@ -1,7 +1,5 @@
-@extends('layouts.app', ['activePage' => 'cancion', 'titlePage' => __('Administración de Pregunta')])
-
+@extends('layouts.app', ['activePage' => 'pregunta', 'titlePage' => __('Administración de Pregunta')])
 @section('content')
-
   <div class="content">
     <div class="container-fluid">
       <div class="row">
@@ -51,7 +49,11 @@
                                 class="btn btn-danger btn-link btn-sm">
                             <i class="material-icons">close</i>
                         </button>
-                        </form>
+                        </form> ---
+                      <button type="button" rel="tooltip" title="Eliminar" onclick="oPage()"
+                              class="btn btn-danger btn-link btn-sm">
+                          <i class="material-icons">close</i>
+                      </button>
                       </td>
                     </tr>
                   @endforeach
@@ -69,8 +71,8 @@
       <p>{{ $message }}</p>
     </div>
   @endif
-
-
-
   {!! $preguntaList->links() !!}
+@endsection
+@section('javascript')
+    @include('pregunta.app')
 @endsection

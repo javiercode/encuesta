@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'encuesta', 'titlePage' => __('Administración de Encuesta')])
+@extends('layouts.app', ['activePage' => 'opcion', 'titlePage' => __('Administración de Opciones')])
 
 @section('content')
 
@@ -14,7 +14,7 @@
               <div class="row">
                 <div class="col-lg-12 margin-tb">
                   <div class="pull-right">
-                    <a class="nav-link text-white" href="{{ route('encuesta.create') }}" title="Adicionar">
+                    <a class="nav-link text-white" href="{{ route('opcion.create') }}" title="Adicionar">
                       <i class="material-icons">add_box</i> </a>
                   </div>
                 </div>
@@ -25,30 +25,21 @@
                 <table class="table table-hover">
                   <thead class="text-primary">
                   <th>Nro</th>
-                  <th>Nombre</th>
-                  <th>Periodo</th>
-                  <th>Autorizaciones</th>
-                  <th>Estado</th>
+                  <th>Valor</th>
+                  <th>Orden</th>
                   <th width="280px">Acciones</th>
                   </thead>
                   <tbody>
-                  @foreach ($encuestaList as $encuesta)
+                  @foreach ($opcionList as $opcion)
                     <tr>
                       <td>{{ ++$i }}</td>
-                      <td>{{ $encuesta->nombre }} <br>
-                        <small>{{ $encuesta->descripcion }}</small>
+                      <td>{{ $opcion->valor }} <br>
+                        <strong>texto: </strong> <small>{{ $opcion->texto }}</small>
                       </td>
-                      <td>{{ \Carbon\Carbon::parse($encuesta->fecha_inicio)->format('jS, M Y') }} -
-                        {{ \Carbon\Carbon::parse($encuesta->fecha_fin)->format('jS, M Y') }}</td>
+                      <td>{{ $opcion->orden }}</td>
                       <td>
-                        Correo: {{ $encuesta->correo_autorizado? 'SI':'NO' }} <br>
-                        Session: {{ $encuesta->session_autorizado? 'SI':'NO' }} <br>
-                        Por persona: {{ $encuesta->respuesta_persona? 'SI':'NO' }} <br>
-                      </td>
-                      <td> {{ $encuesta->estado? 'Abierto':'Cerrado' }}</td>
-                      <td>
-                        <form action="{{ route('encuesta.destroy',  $encuesta->id) }}" method="POST">
-                          <a href="{{ route('encuesta.edit', $encuesta) }}">
+                        <form action="{{ route('opcion.destroy',  $opcion->id) }}" method="POST">
+                          <a href="{{ route('opcion.edit', $opcion) }}">
                             <i class="material-icons">edit</i> </a>
                           @csrf
                           @method('DELETE')
@@ -77,5 +68,5 @@
 
 
 
-  {!! $encuestaList->links() !!}
+  {!! $opcionList->links() !!}
 @endsection
