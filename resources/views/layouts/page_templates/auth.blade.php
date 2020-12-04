@@ -5,5 +5,6 @@
     @yield('content')
     @include('layouts.footers.auth')
     @include('lib.appjs')
+    @yield('javascript')
   </div>
 </div>

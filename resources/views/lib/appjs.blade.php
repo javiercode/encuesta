@@ -8,9 +8,9 @@
 <script type="text/javascript">
     var oPageGeneric={
         init:function () {
-            oPageGeneric.initSelect2();
-            oPageGeneric.initDatePicker();
-            $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+//            oPageGeneric.initSelect2();
+//            oPageGeneric.initDatePicker();
+//            $.fn.modal.Constructor.prototype.enforceFocus = function() {};
         },
         controlKeyEnter:function(){
             $('input').keypress(function(e) {
@@ -54,7 +54,8 @@
             }).parent().show();
         },
         delete:function (url,data) {
-            data._token = "{{csrf_token()}}";
+            data._token = "{{csrf_token()}}"
+            console.log(data);
             $.ajax({
                 url: url,
                 type: 'DELETE',

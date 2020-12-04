@@ -49,8 +49,9 @@
                                 class="btn btn-danger btn-link btn-sm">
                             <i class="material-icons">close</i>
                         </button>
-                        </form> ---
-                      <button type="button" rel="tooltip" title="Eliminar" onclick="oPage()"
+                        </form>
+                      <button type="button" rel="tooltip" title="Eliminar"
+                              onclick="oPage.delete('{{ route('pregunta.destroy',  $pregunta->id) }}', '{{$pregunta->id}}')"
                               class="btn btn-danger btn-link btn-sm">
                           <i class="material-icons">close</i>
                       </button>
@@ -66,6 +67,9 @@
       </div>
     </div>
   </div>
+
+  <script type="text/javascript" src="pregunta/app.blade.php"></script>
+
   @if ($message = Session::get('success'))
     <div class="alert alert-success">
       <p>{{ $message }}</p>
