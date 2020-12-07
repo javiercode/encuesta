@@ -15,30 +15,34 @@
         },
         initData:function(){
             var $divContent = $(".div-content");
-
-
-        },
+            },
         showModal:function (sensor, pkAsignacion) {
             var $form = $("#formAsignacion");
             $form.find("input[name='pk']").val(pkAsignacion);
             $form.find(".div-nombre-sensor").html(sensor);
             $('#mAsignacion').modal('show');
         },
-        delete:function (id) {
-//            var $pk = $(obj).closest('tr').find("input[name='pk']");
+        delete:function ($url, $id) {
             var $aData = {
-                'id':id
+                'id':$id
             };
-            oPageGeneric.delete("{{url('pregunta.destroy')}}", $aData)
+            oPageGeneric.delete($url, $aData)
+//            oPageGeneric.delete($url, null)
         },
 
     };
     document.addEventListener("DOMContentLoaded", function(event) {
-        console.log("131313");
-    });
-    $(document).ready(function(){
-        console.log("asdfasdf");
         oPage.init();
+        console.log(jQuery().jquery);
+//        Swal.fire(
+//            'Eliminado!',
+//            'Registro eliminado',
+//            'success'
+//        )
     });
+//    $(document).ready(function(){
+//        console.log("asdfasdf");
+//        oPage.init();
+//    });
 </script>
 
