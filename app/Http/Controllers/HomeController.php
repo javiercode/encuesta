@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Encuesta;
+use App\Models\Pregunta;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
 
     /**
@@ -27,5 +29,17 @@ class HomeController extends Controller
 
         return view('dashboard', ['encuestaList'=>$encuestaList])
             ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    public function graficoPregunta(){
+
+        $preguntaList = Pregunta::select('tipo', DB::raw('count(*) as total'))
+            ->groupBy('tipo')
+            ->get()->toArray();
+
+        return $preguntaList;
+
+//        return view('encuesta.index', compact('encuestaList'))
+//            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 }

@@ -188,9 +188,9 @@ md = {
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
       dataDailySalesChart = {
-        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        labels: ['A', 'C', 'OM', 'UO', 'F', 'S', 'S'],
         series: [
-          [12, 17, 7, 17, 23, 18, 38]
+          [40, 17, 7, 17, 23, 18, 38]
         ]
       };
 
@@ -307,13 +307,14 @@ md = {
     }
   },
 
-  initDashboardPageCharts: function() {
+  initDashboardPageCharts: function(url) {
+    console.log(url);
 
     if ($('#dailySalesChart').length != 0 || $('#completedTasksChart').length != 0 || $('#websiteViewsChart').length != 0) {
       /* ----------==========     Daily Sales Chart initialization    ==========---------- */
 
       dataDailySalesChart = {
-        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        labels: ['A', 'T', 'W', 'T', 'F', 'S', 'S'],
         series: [
           [12, 17, 7, 17, 23, 18, 38]
         ]
@@ -370,11 +371,12 @@ md = {
 
       /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
 
-      var dataWebsiteViewsChart = {
-        labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
-        series: [
-          [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
 
+
+      var dataWebsiteViewsChart = {
+        labels: ['RC', 'RA', 'MUU', 'MUV', 'File'],
+        series: [
+          [0,0,0,0,0]
         ]
       };
       var optionsWebsiteViewsChart = {
@@ -400,10 +402,39 @@ md = {
           }
         }]
       ];
-      var websiteViewsChart = Chartist.Bar('#websiteViewsChart', dataWebsiteViewsChart, optionsWebsiteViewsChart, responsiveOptions);
 
-      //start animation for the Emails Subscription Chart
-      md.startAnimationForBarChart(websiteViewsChart);
+    $.getJSON(url,{},function (response) {
+        var $aDataSensor = {};
+        var $aDataSensorGrafico = {};
+
+        $.each( response, function(key, oValue) {
+            console.log(oValue);
+            oValue.total =oValue.total*100;
+            switch (oValue.tipo){
+                case 'checkbox':
+                    dataWebsiteViewsChart.series[0][3] = oValue.total;
+                  break;
+                case 'file':
+                    dataWebsiteViewsChart.series[0][4] = oValue.total;
+                  break;
+                case 'radio':
+                    dataWebsiteViewsChart.series[0][2] = oValue.total;
+                    break;
+                case 'text':
+                    dataWebsiteViewsChart.series[0][0] = oValue.total;
+                  break;
+                case 'textarea':
+                    dataWebsiteViewsChart.series[0][1] = oValue.total;
+                  break;
+            }
+        });
+        console.log(dataWebsiteViewsChart);
+        var websiteViewsChart = Chartist.Bar('#websiteViewsChart', dataWebsiteViewsChart, optionsWebsiteViewsChart, responsiveOptions);
+        //start animation for the Emails Subscription Chart
+        md.startAnimationForBarChart(websiteViewsChart);
+    });
+
+
     }
   },
 

@@ -13,6 +13,8 @@
 -   ejecutar el siguiente comando: "php artisan migrate"
 -   ejecutar el siguiente comando: "php artisan db:seed"
 -   ejecutar el siguiente comando: "php artisan key:generate"
+-   ejecutar el siguiente comando: "composer upddate"
+-   ejecutar el siguiente comando: "npm install"
 
 
 #### Usuario por defecto
