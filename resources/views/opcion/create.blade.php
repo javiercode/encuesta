@@ -26,16 +26,23 @@
                 <div class="row">
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
+                      <strong>Pregunta:</strong>
+                      <select name="id_pregunta" class="form-control">
+                        @foreach ($preguntaList as $pregunta)
+                          <option value="{{$pregunta['id']}}">{{$pregunta['titulo']}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="form-group">
                       <strong>Valor:</strong>
                       <input type="text" name="valor" class="form-control" placeholder="Valor">
                     </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                       <strong>Texto:</strong>
                       <input type="text" name="texto" class="form-control" placeholder="Texto">
                     </div>
-
-                  </div>
-                  <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                       <strong>Orden:</strong>
                       <input type="number" name="orden"  data-plugin="switchery" placeholder="Orden">

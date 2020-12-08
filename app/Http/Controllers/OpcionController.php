@@ -16,7 +16,16 @@ class OpcionController extends Controller
     public function index()
     {
         $opcionPage = Opcion::latest()->paginate(10);
-        return view('opcion.index', ['opcionList'=>$opcionPage])
+
+        $preguntaList = Pregunta::orderBy('titulo', 'asc')->get()
+            ->map(function ($record) {
+                return array($record->id => $record->titulo);
+            })->all();
+        $preguntaList= array_reduce($preguntaList,function ($carray, $oValue){
+            $carray[key($oValue)]=$oValue[key($oValue)];
+            return $carray;
+        });
+        return view('opcion.index', ['opcionList'=>$opcionPage, 'preguntaList'=>$preguntaList])
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -39,9 +48,9 @@ class OpcionController extends Controller
      */
     public function create()
     {
-        $opcionList = Opcion::orderBy('orden', 'asc')
+        $preguntaList = Pregunta::orderBy('titulo', 'asc')
             ->get()->toArray();
-        return view('opcion.create',compact('opcionList'));
+        return view('opcion.create',['preguntaList'=>$preguntaList]);
     }
 
     /**
@@ -58,10 +67,10 @@ class OpcionController extends Controller
             'texto' => 'required'
         ]);
 
-        Pregunta::create($request->all());
+        Opcion::create($request->all());
 
         return redirect()->route('opcion.index')
-            ->with('success', 'Pregunta creada satisfactoriamente.');
+            ->with('success', 'Opcion creada satisfactoriamente.');
     }
 
     /**

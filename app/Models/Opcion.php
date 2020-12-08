@@ -11,7 +11,7 @@ class Opcion extends Model
 
     protected $table = 'opcion';
 
-    protected $fillable = ['texto', 'valor', 'orden'];
+    protected $fillable = ['id_pregunta','texto', 'valor', 'orden'];
 
     public $timestamps = true;
 }

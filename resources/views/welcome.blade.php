@@ -5,6 +5,12 @@
   <div class="row justify-content-center">
       <div class="col-lg-7 col-md-8">
           <h1 class="text-white text-center">{{ __('Welcome to Material Dashboard FREE Laravel Live Preview.') }}</h1>
+          @auth
+              auth
+          @endauth
+          @guest()
+              guest
+          @endguest
       </div>
   </div>
 </div>

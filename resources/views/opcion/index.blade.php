@@ -9,8 +9,12 @@
           <div class="card card-plain">
             <div class="card-header card-header-primary">
               <h4 class="card-title mt-0"> Listado</h4>
-
-
+              @auth
+                auth
+              @endauth
+              @guest()
+                guest
+              @endguest
               <div class="row">
                 <div class="col-lg-12 margin-tb">
                   <div class="pull-right">

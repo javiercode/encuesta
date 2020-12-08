@@ -1,16 +1,17 @@
-{{--@extends('layouts.app', ['activePage' => 'dashboard'])--}}
-@extends('layouts.app', [ 'title' => __('Dashboard'),'activePage' => 'dashboard'])
+@extends('layouts.app', ['title' => __('Dashboard'), 'titlePage' => __('Dashboard'),
+'activePage' => 'dashboard'])
+
 
 @section('content')
   <div class="content">
     <div class="container-fluid">
-      <div class="row">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-      </div>
+      <div class="row"><br><br></div>
+      <div class="row"><br><br></div>
+        <div class="row">
+            <div class="row">
+                <div class="col-lg-6 col-md-12"></div>
+            </div>
+        </div>
       <div class="row">
         <div class="col-md-4">
         </div>
@@ -21,23 +22,20 @@
             </div>
             <div class="card-body">
               <h4 class="card-title">Tipos de preguntas</h4>
-              <p class="card-category">Encunesta</p>
+              <p class="card-category">Encuesta</p>
             </div>
             <div class="card-footer">
               <div class="stats">
                 <i class="material-icons">RA</i> Respuesta Abierta
-                <i class="material-icons">RC</i> Respuesta Cerrada
-                <i class="material-icons">MUU</i> Respuesta Multiple Unica
-                <i class="material-icons">MUV</i> Respuesta Multiple Varias
-                <i class="material-icons">File</i> Respuesta De archivo
-                <i class="material-icons">ruta</i>
+                <i class="material-icons">RC</i> Respuesta Cerrada <br>
+                <i class="material-icons">MUU</i> Respuesta Multiple Unica <br>
+                <i class="material-icons">MUV</i> Respuesta Multiple Varias <br>
+                <i class="material-icons">File</i> Respuesta De archivo <br>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-
-        </div>
+        <div class="col-md-4"></div>
       </div>
       <div class="row">
         <div class="col-lg-6 col-md-12">
