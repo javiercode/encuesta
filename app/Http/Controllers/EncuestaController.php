@@ -16,7 +16,7 @@ class EncuestaController extends Controller
     {
         $encuestaList = Encuesta::latest()->paginate(10);
         return view('encuesta.index', compact('encuestaList'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -83,9 +83,13 @@ class EncuestaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //print_r($request->all());exit;
         $request->validate([
-            'nombre' => 'required'
+            'nombre' => 'required',
+            'fecha_inicio' => 'required',
+            'fecha_fin' => 'required',
         ]);
+
         $encuesta = Encuesta::find($id);
         $encuesta->update($request->all());
 
@@ -96,13 +100,12 @@ class EncuestaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  integer $id
+     * @param  Request $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        Encuesta::destroy($id);
-        return redirect()->route('encuesta.index')
-            ->with('success', 'Encuesta eliminada satisfactoriamente');
+    public function destroy(Request $request){
+        Encuesta::destroy($request->all()['id']);
+        return response()->json([
+            'success' => 'Encuesta eliminada satisfactoriamente']);
     }
 }

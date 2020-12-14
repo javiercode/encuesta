@@ -39,6 +39,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('encuesta', 'App\Http\Controllers\EncuestaController', ['except' => ['show']]);
     Route::resource('pregunta', 'App\Http\Controllers\PreguntaController', ['except' => ['show']]);
     Route::resource('opcion', 'App\Http\Controllers\OpcionController', ['except' => ['show']]);
+    Route::delete('pregunta/delete', ['as' => 'pregunta.delete', 'uses'=>'App\Http\Controllers\PreguntaController@destroy']);
+    Route::delete('opcion/delete', ['as' => 'opcion.delete', 'uses'=>'App\Http\Controllers\OpcionController@destroy']);
+    Route::delete('encuesta/delete', ['as' => 'encuesta.delete', 'uses'=>'App\Http\Controllers\EncuestaController@destroy']);
 });
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');

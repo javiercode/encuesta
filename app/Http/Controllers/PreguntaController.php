@@ -108,7 +108,9 @@ class PreguntaController extends Controller
     public function edit($id)
     {
         $pregunta=Pregunta::find($id);
-        return view('pregunta.edit', ['pregunta'=>$pregunta]);
+        $encuentaList = Encuesta::orderBy('nombre', 'desc')
+            ->get()->toArray();
+        return view('pregunta.edit', ['pregunta'=>$pregunta, 'encuestaList'=>$encuentaList, 'tipoEncuesta'=>$this->getTipo()]);
     }
 
     /**
@@ -135,13 +137,12 @@ class PreguntaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  integer $id
+     * @param  Request $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        Pregunta::destroy($id);
-        return redirect()->route('pregunta.index')
-            ->with('success', 'Pregunta eliminada satisfactoriamente');
+    public function destroy(Request $request){
+        Pregunta::destroy($request->all()['id']);
+        return response()->json([
+            'success' => 'Pregunta eliminada satisfactoriamente']);
     }
 }

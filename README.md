@@ -20,3 +20,6 @@
 #### Usuario por defecto
 -    Usuario: admin@mail.com
 -    Password: 123456
+
+#### Librerias usadas
+-    Plantilla: "laravel-frontend-presets/material-dashboard": "1.1"

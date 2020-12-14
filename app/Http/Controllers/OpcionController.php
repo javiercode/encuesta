@@ -94,7 +94,9 @@ class OpcionController extends Controller
     public function edit($id)
     {
         $opcion=Opcion::find($id);
-        return view('opcion.edit', ['opcion'=>$opcion]);
+        $preguntaList = Pregunta::orderBy('titulo', 'asc')
+            ->get()->toArray();
+        return view('opcion.edit', ['opcion'=>$opcion, 'preguntaList'=>$preguntaList]);
     }
 
     /**
@@ -121,13 +123,12 @@ class OpcionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  integer  $id
+     * @param  Request $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Opcion $id)
-    {
-        Opcion::destroy($id);
-        return redirect()->route('opcion.index')
-            ->with('success', 'Respuesta eliminada satisfactoriamente');
+    public function destroy(Request $request){
+        Opcion::destroy($request->all()['id']);
+        return response()->json([
+            'success' => 'Opcion eliminada satisfactoriamente']);
     }
 }

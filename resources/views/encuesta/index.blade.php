@@ -47,16 +47,13 @@
                       </td>
                       <td> {{ $encuesta->estado? 'Abierto':'Cerrado' }}</td>
                       <td>
-                        <form action="{{ route('encuesta.destroy',  $encuesta->id) }}" method="POST">
-                          <a href="{{ route('encuesta.edit', $encuesta) }}">
-                            <i class="material-icons">edit</i> </a>
-                          @csrf
-                          @method('DELETE')
-                        <button type="submit" rel="tooltip" title="Eliminar"
+                        <a href="{{ route('encuesta.edit', $encuesta) }}">
+                          <i class="material-icons">edit</i> </a>
+                        <button type="button" rel="tooltip" title="Eliminar"
+                                onclick="oPage.delete('{{ route('encuesta.delete') }}', '{{$pregunta->id}}')"
                                 class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
+                          <i class="material-icons">close</i>
                         </button>
-                        </form>
                       </td>
                     </tr>
                   @endforeach

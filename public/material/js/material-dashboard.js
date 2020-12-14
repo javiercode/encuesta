@@ -311,65 +311,8 @@ md = {
     console.log(url);
 
     if ($('#dailySalesChart').length != 0 || $('#completedTasksChart').length != 0 || $('#websiteViewsChart').length != 0) {
-      /* ----------==========     Daily Sales Chart initialization    ==========---------- */
 
-      dataDailySalesChart = {
-        labels: ['A', 'T', 'W', 'T', 'F', 'S', 'S'],
-        series: [
-          [12, 17, 7, 17, 23, 18, 38]
-        ]
-      };
-
-      optionsDailySalesChart = {
-        lineSmooth: Chartist.Interpolation.cardinal({
-          tension: 0
-        }),
-        low: 0,
-        high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-        chartPadding: {
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0
-        },
-      }
-
-      var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
-
-      md.startAnimationForLineChart(dailySalesChart);
-
-
-
-      /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
-
-      dataCompletedTasksChart = {
-        labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
-        series: [
-          [230, 750, 450, 300, 280, 240, 200, 190]
-        ]
-      };
-
-      optionsCompletedTasksChart = {
-        lineSmooth: Chartist.Interpolation.cardinal({
-          tension: 0
-        }),
-        low: 0,
-        high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-        chartPadding: {
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0
-        }
-      }
-
-      var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
-
-      // start animation for the Completed Tasks Chart - Line Chart
-      md.startAnimationForLineChart(completedTasksChart);
-
-
-      /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
+      /* ----------==========     GRafico Escala    ==========---------- */
 
 
 
@@ -403,36 +346,43 @@ md = {
         }]
       ];
 
-    $.getJSON(url,{},function (response) {
-        var $aDataSensor = {};
-        var $aDataSensorGrafico = {};
 
-        $.each( response, function(key, oValue) {
-            console.log(oValue);
-            oValue.total =oValue.total*100;
-            switch (oValue.tipo){
-                case 'checkbox':
-                    dataWebsiteViewsChart.series[0][3] = oValue.total;
-                  break;
-                case 'file':
-                    dataWebsiteViewsChart.series[0][4] = oValue.total;
-                  break;
-                case 'radio':
-                    dataWebsiteViewsChart.series[0][2] = oValue.total;
-                    break;
-                case 'text':
-                    dataWebsiteViewsChart.series[0][0] = oValue.total;
-                  break;
-                case 'textarea':
-                    dataWebsiteViewsChart.series[0][1] = oValue.total;
-                  break;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            async: true,
+            data: {},
+            dataType: 'json',
+            success: function (response) {
+                $.each( response, function(key, oValue) {
+                    console.log(oValue);
+                    oValue.total =oValue.total*100;
+                    switch (oValue.tipo){
+                        case 'checkbox':
+                            dataWebsiteViewsChart.series[0][3] = oValue.total;
+                            break;
+                        case 'file':
+                            dataWebsiteViewsChart.series[0][4] = oValue.total;
+                            break;
+                        case 'radio':
+                            dataWebsiteViewsChart.series[0][2] = oValue.total;
+                            break;
+                        case 'text':
+                            dataWebsiteViewsChart.series[0][0] = oValue.total;
+                            break;
+                        case 'textarea':
+                            dataWebsiteViewsChart.series[0][1] = oValue.total;
+                            break;
+                    }
+                });
+                var websiteViewsChart = Chartist.Bar('#websiteViewsChart', dataWebsiteViewsChart, optionsWebsiteViewsChart, responsiveOptions);
+                //start animation for the Emails Subscription Chart
+                md.startAnimationForBarChart(websiteViewsChart);
+            },
+            error: function (error) {
+                console.log(error);
             }
         });
-        console.log(dataWebsiteViewsChart);
-        var websiteViewsChart = Chartist.Bar('#websiteViewsChart', dataWebsiteViewsChart, optionsWebsiteViewsChart, responsiveOptions);
-        //start animation for the Emails Subscription Chart
-        md.startAnimationForBarChart(websiteViewsChart);
-    });
 
 
     }

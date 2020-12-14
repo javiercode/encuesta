@@ -54,7 +54,7 @@
             }).parent().show();
         },
         delete:function (url,data) {
-            data._token = "{{csrf_token()}}"
+            data._token = "{{csrf_token()}}";
             console.log(data);
             $.ajax({
                 url: url,
@@ -63,12 +63,12 @@
                 data: data,
                 dataType: 'json',
                 success: function (response) {
-                    location.reload();
                     Swal.fire(
                         'Eliminado!',
-                        'Registro eliminado',
+                        response.success,
                         'success'
-                    )
+                    );
+                    location.reload();
                 },
                 error: function (error) {
                     console.log(error);

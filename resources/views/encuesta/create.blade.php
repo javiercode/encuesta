@@ -7,21 +7,10 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card card-plain">
-            <div class="card-header card-header-primary">
-              <h4 class="card-title mt-0"> Crear Encuesta</h4>
-              <div class="row">
-                <div class="col-lg-12 margin-tb">
-                  <div class="pull-right">
-                    <a class="nav-link text-white" href="{{ route('encuesta.create') }}" title="Adicionar">
-                      <i class="material-icons">add_box</i> </a>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="card-body">
               @if ($errors->any())
                 <div class="alert alert-danger">
-                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                  <strong>Whoops!</strong> Hubo algunos problemas en el Ingreso.<br><br>
                   <ul>
                     @foreach ($errors->all() as $error)
                       <li>{{ $error }}</li>
@@ -65,7 +54,7 @@
                     </div>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
                   </div>
                 </div>
 

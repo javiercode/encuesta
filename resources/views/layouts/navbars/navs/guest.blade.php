@@ -14,12 +14,12 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a href="{{ route('home') }}" class="nav-link">
-            <i class="material-icons">dashboard</i> {{ __('Dashboard') }}
+            <i class="material-icons">dashboard</i> {{ __('Grafico') }}
           </a>
         </li>
         <li class="nav-item{{ $activePage == 'register' ? ' active' : '' }}">
           <a href="{{ route('register') }}" class="nav-link">
-            <i class="material-icons">person_add</i> {{ __('Register') }}
+            <i class="material-icons">person_add</i> {{ __('Registro') }}
           </a>
         </li>
         <li class="nav-item{{ $activePage == 'login' ? ' active' : '' }}">

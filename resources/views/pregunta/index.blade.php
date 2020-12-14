@@ -40,21 +40,13 @@
                       <td>{{ $pregunta->tipo}}</td>
                       <td> {{ $pregunta->cantidad_archivo}}</td>
                       <td>
-                        <form action="{{ route('pregunta.destroy',  $pregunta->id) }}" method="POST">
-                          <a href="{{ route('pregunta.edit', $pregunta) }}">
+                        <a href="{{ route('pregunta.edit', $pregunta) }}">
                             <i class="material-icons">edit</i> </a>
-                          @csrf
-                          @method('DELETE')
-                        <button type="submit" rel="tooltip" title="Eliminar"
+                        <button type="button" rel="tooltip" title="Eliminar"
+                                onclick="oPage.delete('{{ route('pregunta.delete') }}', '{{$pregunta->id}}')"
                                 class="btn btn-danger btn-link btn-sm">
                             <i class="material-icons">close</i>
                         </button>
-                        </form>
-                      <button type="button" rel="tooltip" title="Eliminar"
-                              onclick="oPage.delete('{{ route('pregunta.destroy',  $pregunta->id) }}', '{{$pregunta->id}}')"
-                              class="btn btn-danger btn-link btn-sm">
-                          <i class="material-icons">close</i>
-                      </button>
                       </td>
                     </tr>
                   @endforeach

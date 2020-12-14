@@ -42,16 +42,13 @@
                       </td>
                       <td>{{ $opcion->orden }}</td>
                       <td>
-                        <form action="{{ route('opcion.destroy',  $opcion->id) }}" method="POST">
-                          <a href="{{ route('opcion.edit', $opcion) }}">
-                            <i class="material-icons">edit</i> </a>
-                          @csrf
-                          @method('DELETE')
-                        <button type="submit" rel="tooltip" title="Eliminar"
+                        <a href="{{ route('opcion.edit', $opcion) }}">
+                          <i class="material-icons">edit</i> </a>
+                        <button type="button" rel="tooltip" title="Eliminar"
+                                onclick="oPage.delete('{{ route('opcion.delete') }}', '{{$pregunta->id}}')"
                                 class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
+                          <i class="material-icons">close</i>
                         </button>
-                        </form>
                       </td>
                     </tr>
                   @endforeach
@@ -69,8 +66,8 @@
       <p>{{ $message }}</p>
     </div>
   @endif
-
-
-
   {!! $opcionList->links() !!}
+@endsection
+@section('javascript')
+  @include('opcion.app')
 @endsection
